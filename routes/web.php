@@ -11,6 +11,25 @@
 |
 */
 
+use App\Bike;
+use App\Manufacturer;
+use App\Custom;
+
 Route::get('/', function () {
-    return view('welcome');
+    $customs = Custom::limit(6)->orderby('id', 'desc')->get();
+    return view('welcome', ['customs' => $customs]);
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('custom', 'CustomController', ['only' => ['create', 'store',]]);
+
+Route::get('/custom/create/bike', function() {
+    return Bike::all();
+});
+
+Route::get('/custom/create/manufacturer', function() {
+    return Manufacturer::all();
 });
