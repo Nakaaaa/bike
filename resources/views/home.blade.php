@@ -29,7 +29,7 @@
                                 <p class="card-text">
                                     {!! nl2br(e($manu->customs)) !!}
                                 </p>
-                                <a href="#" class="btn btn-primary">投稿を編集する</a>
+                                <a href="{{ route('custom.edit', ['custom' => $manu]) }}" class="btn btn-primary">投稿を編集する</a>
                             </div>
                         </div>
                     @endforeach

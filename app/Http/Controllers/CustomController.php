@@ -64,4 +64,11 @@ class CustomController extends Controller
 
         return Redirect()->route('home');
     }
+
+    public function edit($id)
+    {
+        $showcustom = Custom::findOrFail($id);
+
+        return view('custom.edit', ['custom' => $showcustom]);
+    }
 }

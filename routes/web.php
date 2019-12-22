@@ -24,7 +24,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('custom', 'CustomController', ['only' => ['create', 'store',]]);
+Route::resource('custom', 'CustomController', ['only' => ['create', 'store', 'edit']]);
 
 Route::get('/custom/create/bike', function() {
     return Bike::all();
