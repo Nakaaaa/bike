@@ -71,4 +71,13 @@ class CustomController extends Controller
 
         return view('custom.edit', ['custom' => $showcustom]);
     }
+
+    public function destroy($id)
+    {
+        $deletecustom = Custom::findOrFail($id);
+
+        $deletecustom->delete();
+
+        return Redirect()->route('home');
+    }
 }
