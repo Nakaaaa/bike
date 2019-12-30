@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <a href="{{ route('custom.create') }}" class="btn btn-primary">新規投稿する</a>
-            <div class="card">
+            <div class="card mt-2">
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
@@ -23,7 +23,8 @@
 
                     @foreach ($custom as $manu)
                     <div class="card mb-3" style="width:30rem">
-                        <img class="card-img-top" src="{{ asset('/storage/img/'.$manu->img) }}">
+
+                        <img class="card-img-top" src="{{ empty($manu->img) ? asset('storage/img/null/Noimage_image.png') : asset('/storage/img/'.$manu->img) }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ $manu->title }}</h5>
                             <p class="card-text">

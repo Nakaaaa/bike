@@ -9,7 +9,6 @@ use App\Manufacturer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\Facades\Image;
-// use Image;
 
 class CustomController extends Controller
 {
@@ -36,19 +35,18 @@ class CustomController extends Controller
             ],
         ]);
 
-        if ($request->file('file')->isValid([]))
-        {
+        if (is_null($request->file('file'))) {
 
-            // $fileimage = $request->file;
-            // logger($fileimage);
-            // $filename = str_shuffle(time().$fileimage->getClientOriginalExtension()). '.' . $fileimage->getClientOriginalExtension();
-            // logger($filename);
-            // \Image::make($fileimage)->resize(120,80)->save(storage_path('app/public/img/'.$filename));
-
-            $temppath = $request->file->store('public/img');
-            $path = $temppath;
-            
+            $path = NULL;
+        } else {
+            if ($request->file('file')->isValid([]))
+            {
+                $temppath = $request->file->store('public/img');
+                $path = $temppath;   
+            }
+    
         }
+
         
         Custom::insert([
             [
@@ -79,5 +77,10 @@ class CustomController extends Controller
         $deletecustom->delete();
 
         return Redirect()->route('home');
+    }
+
+    public function update(Request $request, $id)
+    {
+        
     }
 }
