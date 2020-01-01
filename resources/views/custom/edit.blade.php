@@ -11,6 +11,7 @@
 
         <form action="{{ route('custom.update', ['custom'=> $custom]) }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             {{ csrf_field() }}
             <fieldset>
                 <div class="form-group">
@@ -25,9 +26,7 @@
                 </div>
                 <div class="form-group">
                     <label for="custom">カスタム内容</label>
-                    <textarea name="customs" id="customs" cols="" rows="6" class="form-control">
-                        {{ old('customs') ?: $custom->customs }}
-                    </textarea>
+                    <textarea name="customs" id="customs" cols="" rows="6" class="form-control">{{ old('customs') ?: $custom->customs }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="file">ファイルを選択する</label>
@@ -37,7 +36,7 @@
 
                 <div class="mt-5">
                     <a href="{{ route('home') }}" class="btn btn-secondary">キャンセル</a>
-                    <button type="submit" class="btn btn-primary">投稿する</button>
+                    <button type="submit" class="btn btn-primary">修正する</button>
                 </div>
             </fieldset>
         </form>

@@ -39,15 +39,13 @@ class CustomController extends Controller
 
             $path = NULL;
         } else {
-            if ($request->file('file')->isValid([]))
-            {
+            if ($request->file('file')->isValid([])) {
                 $temppath = $request->file->store('public/img');
-                $path = $temppath;   
+                $path = $temppath;
             }
-    
         }
 
-        
+
         Custom::insert([
             [
                 'title' => $request->title,
@@ -81,6 +79,51 @@ class CustomController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+        $path = "";
+        $filename = "";
+
+        $request->validate([
+            'title' => 'required|max:255',
+            'customs' => 'required|max:2000',
+            'manufacturer' => 'required',
+            'file' => [
+                'file',
+                'image',
+                'mimes:jpeg,jpg,png,gif,JPEG'
+            ],
+        ]);
+
+        if (is_null($request->file('file'))) {
+
+            $path = NULL;
+        } else {
+            if ($request->file('file')->isValid([])) {
+                $temppath = $request->file->store('public/img');
+                $path = $temppath;
+            }
+        }
+
+        $custom = Custom::findOrFail($id);
+        $custom->fill([
+            
+                'title' => $request->title,
+                'customs' => $request->customs,
+                'img' => basename($path),
+                'bike_id' => $request->bike,
+                'updated_at' => date("Y-m-d")
+            
+        ])->save();
+
+        // Custom::find($id)->update([
+        //     [
+        //         'title' => $request->title,
+        //         'customs' => $request->customs,
+        //         'img' => basename($path),
+        //         'bike_id' => $request->bike,
+        //         'updated_at' => date("Y/m/d")
+        //     ]
+        // ]);
+
+        return Redirect()->route('home');
     }
 }
