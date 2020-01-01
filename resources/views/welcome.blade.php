@@ -93,7 +93,7 @@
             <div class="col-md-8">
                 @foreach($customs as $custom)
                 <div class="card mt-3" style="width:35rem">
-                    <img class="card-img-top" src="{{ asset('/storage/img/'.$custom->img) }}">
+                    <img class="card-img-top" src="{{ empty($custom->img) ? asset('/storage/img/null/Noimage_image.png') : asset('/storage/img/'.$custom->img) }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ $custom->title }}</h5>
                         <p class="card-text">
